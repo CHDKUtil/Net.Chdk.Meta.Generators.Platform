@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Net.Chdk.Meta.Generators.Platform
 {
-    public sealed class PlatformGenerator : IPlatformGenerator
+    sealed class PlatformGenerator : IPlatformGenerator
     {
         private IEnumerable<IInnerPlatformGenerator> Generators { get; }
 
