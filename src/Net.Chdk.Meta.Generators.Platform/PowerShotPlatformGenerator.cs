@@ -4,11 +4,32 @@ using System.Linq;
 
 namespace Net.Chdk.Meta.Generators.Platform
 {
-    public abstract class PowerShotPlatformGenerator : InnerPlatformGeneratorBase
+    public class PowerShotPlatformGenerator : InnerPlatformGeneratorBase
     {
         protected override string Keyword => "PowerShot";
 
         protected override string[] Suffixes => new[] { "IS" };
+
+        protected IIxusPlatformGenerator IxusGenerator { get; }
+
+        public PowerShotPlatformGenerator(IIxusPlatformGenerator ixusGenerator)
+        {
+            IxusGenerator = ixusGenerator;
+        }
+
+        public override string GetPlatform(string[] models)
+        {
+            var ps = base.GetPlatform(models);
+            if (ps != null && models.Length > 1)
+            {
+                var ixus = IxusGenerator.Generate(models[1]);
+                if (ixus != null)
+                {
+                    return $"{ixus}_{ps}";
+                }
+            }
+            return ps;
+        }
 
         protected override IEnumerable<string> Trim(IEnumerable<string> split)
         {
