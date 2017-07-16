@@ -24,8 +24,7 @@ namespace Net.Chdk.Meta.Generators.Platform
             if (Suffixes.Any(t => t.Equals(last)) == true)
                 split = Trim(split);
 
-            return string.Join(string.Empty, split)
-                .ToLower();
+            return PostProcess(split);
         }
 
         protected virtual IEnumerable<string> PreGenerate(string source)
@@ -39,6 +38,12 @@ namespace Net.Chdk.Meta.Generators.Platform
         protected virtual IEnumerable<string> Process(IEnumerable<string> split)
         {
             return split;
+        }
+
+        protected virtual string PostProcess(IEnumerable<string> split)
+        {
+            return string.Join(string.Empty, split)
+                .ToLower();
         }
 
         protected virtual IEnumerable<string> Trim(IEnumerable<string> split)
