@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace Net.Chdk.Meta.Generators.Platform
 {
-    public class PowerShotPlatformGenerator : InnerPlatformGeneratorBase
+    sealed class PowerShotPlatformGenerator : InnerPlatformGeneratorBase
     {
         protected override string Keyword => "PowerShot";
 
         protected override string[] Suffixes => new[] { "IS" };
 
-        protected IIxusPlatformGenerator IxusGenerator { get; }
+        private IIxusPlatformGenerator IxusGenerator { get; }
 
         public PowerShotPlatformGenerator(IIxusPlatformGenerator ixusGenerator)
         {
